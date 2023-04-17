@@ -25,6 +25,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "f6416cb1-72a6-434f-8f63-bea4edd443d1"
+      }
+    },
+    "owner": "bobiinou"
   }
 }
