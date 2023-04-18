@@ -3,6 +3,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Home from '../View/Home';
 import Utilisation from '../View/Regle-d\'utilisation';
 import Notifications from '../View/Notifiaction';
+import Profil from '../View/Profile';
 
 const Tab = createBottomTabNavigator();
 
@@ -32,12 +33,11 @@ export default function MyTabs() {
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="bell" color={color} size={size} />
           ),
-          tabBarBadge: 3,
         }}
       />
       <Tab.Screen
         name="Profil"
-        component={Home}
+        component={Profil}
         options={{
           tabBarLabel: 'Profil',
           tabBarIcon: ({ color, size }) => (
@@ -51,7 +51,7 @@ export default function MyTabs() {
         options={{
           tabBarLabel: 'À propos',
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="about" color={color} size={size} />
+            <MaterialCommunityIcons name="data-matrix" color={color} size={size} />
           ),
         }}
       />
