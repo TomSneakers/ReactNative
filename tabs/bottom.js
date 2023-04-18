@@ -2,7 +2,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Home from '../View/Home';
 import Utilisation from '../View/Regle-d\'utilisation';
-import Notifications from '../View/Notifiaction';
 import Profil from '../View/Profile';
 
 const Tab = createBottomTabNavigator();
@@ -25,16 +24,7 @@ export default function MyTabs() {
           ),
         }}
       />
-      <Tab.Screen
-        name="Notifications"
-        component={Notifications}
-        options={{
-          tabBarLabel: 'Notifications',
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="bell" color={color} size={size} />
-          ),
-        }}
-      />
+      
       <Tab.Screen
         name="Profil"
         component={Profil}
