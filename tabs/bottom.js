@@ -3,6 +3,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Home from '../View/Home';
 import Utilisation from '../View/Regle-d\'utilisation';
 import Profil from '../View/Profile';
+import WriteToFile from '../View/Profile';
 
 const Tab = createBottomTabNavigator();
 
@@ -27,7 +28,7 @@ export default function MyTabs() {
       
       <Tab.Screen
         name="Profil"
-        component={Profil}
+        component={WriteToFile}
         options={{
           tabBarLabel: 'Profil',
           tabBarIcon: ({ color, size }) => (
