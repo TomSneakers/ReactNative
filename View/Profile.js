@@ -1,47 +1,120 @@
-import React, { useState } from 'react';
-import { View, TextInput, Button, Alert } from 'react-native';
-import { FileSystem } from 'expo-file-system';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const WriteToFile = () => {
-  const [inputText, setInputText] = useState('');
+export default function WriteToFile() {
+  const [task, setTask] = useState('');
+  const [taskList, setTaskList] = useState([]);
 
-  const handleWriteToFile = async () => {
-    // Vérifier si l'application dispose des autorisations pour écrire dans un fichier
-    const { status } = await FileSystem.requestPermissionsAsync();
-    if (status !== 'granted') {
-      Alert.alert('Permission refusée', 'Vous devez autoriser l\'accès au système de fichiers pour utiliser cette fonctionnalité.');
-      return;
-    }
+  useEffect(() => {
+    loadTasks();
+  }, []);
 
-    // Définir le chemin du fichier
-    const path = FileSystem.documentDirectory + 'filename.txt';
-
-    // Écrire le texte dans le fichier
+  const loadTasks = async () => {
     try {
-      await FileSystem.writeAsStringAsync(path, inputText, { encoding: FileSystem.EncodingType.UTF8 });
-      Alert.alert('Succès', 'Le texte a été écrit dans le fichier.');
+      const tasks = await AsyncStorage.getItem('tasks');
+      if (tasks) {
+        setTaskList(JSON.parse(tasks));
+      }
     } catch (error) {
       console.log(error);
-      Alert.alert('Erreur', 'Une erreur s\'est produite lors de l\'écriture du fichier.');
     }
-  }
+  };
+
+  const saveTasks = async (tasks) => {
+    try {
+      await AsyncStorage.setItem('tasks', JSON.stringify(tasks));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const addTask = () => {
+    if (task) {
+      const newTaskList = [...taskList, { text: task, completed: false }];
+      setTaskList(newTaskList);
+      setTask('');
+      saveTasks(newTaskList);
+    }
+  };
+
+  const toggleCompleted = (index) => {
+    const updatedTaskList = [...taskList];
+    updatedTaskList[index].completed = !updatedTaskList[index].completed;
+    setTaskList(updatedTaskList);
+    saveTasks(updatedTaskList);
+  };
+
+  const removeTask = (index) => {
+    const updatedTaskList = [...taskList];
+    updatedTaskList.splice(index, 1);
+    setTaskList(updatedTaskList);
+    saveTasks(updatedTaskList);
+  };
 
   return (
-    <View>
-      {/* TextInput pour capturer le texte entré par l'utilisateur */}
+    <View style={styles.container}>
       <TextInput
-        placeholder="Entrez le texte ici"
-        onChangeText={text => setInputText(text)}
-        value={inputText}
+        style={styles.input}
+        value={task}
+        onChangeText={setTask}
+        placeholder="Ajouter une tâche"
       />
-
-      {/* Bouton pour déclencher l'écriture du fichier */}
-      <Button
-        title="Écrire dans un fichier"
-        onPress={handleWriteToFile}
-      />
+      <TouchableOpacity style={styles.button} onPress={addTask}>
+        <Text style={styles.buttonText}>Ajouter</Text>
+      </TouchableOpacity>
+      {taskList.map((task, index) => (
+        <View style={styles.taskContainer} key={index}>
+          <TouchableOpacity onPress={() => toggleCompleted(index)}>
+            <Text style={[styles.taskText, task.completed && styles.completed]}>{task.text}</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => removeTask(index)}>
+            <Text style={styles.removeButton}>Supprimer</Text>
+          </TouchableOpacity>
+        </View>
+      ))}
     </View>
   );
 }
 
-export default WriteToFile;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    padding: 20,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    padding: 10,
+    borderRadius: 5,
+    marginBottom: 20,
+    width: '100%',
+  },
+  button: {
+    backgroundColor: '#007AFF',
+    padding: 10,
+    borderRadius: 5,
+    width: '100%',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  buttonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+  },
+  taskContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  taskText: {
+    fontSize: 18,
+    marginRight: 10,
+  },
+  completed: {
+    textDecorationLine: 'line-through',
+  },
+})
