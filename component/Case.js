@@ -1,10 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect, useContext } from 'react';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import SearchBar from './search';
+import TaskList from './taskList';
+import { Context } from '../context/CaseContext';
 
 export default function WriteToFile() {
+  // get the context
+  const { myCase, setMyCase } = useContext(Context);
+
   const [task, setTask] = useState('');
-  const [taskList, setTaskList] = useState([]);
+  const [originalTaskList, setOriginalTaskList] = useState([]);
 
   useEffect(() => {
     loadTasks();
@@ -12,83 +18,80 @@ export default function WriteToFile() {
 
   const loadTasks = async () => {
     try {
-      //La fonction AsyncStorage.getItem('tasks') récupère la valeur de la clé "tasks" stockée dans AsyncStorage. Si une valeur est récupérée avec succès,
       const tasks = await AsyncStorage.getItem('tasks');
       if (tasks) {
-        //a fonction JSON.parse convertit la valeur JSON en un objet JavaScript
-        setTaskList(JSON.parse(tasks));
+        setMyCase(JSON.parse(tasks));
+        setOriginalTaskList(JSON.parse(tasks));
       }
-    }
-    //Si une erreur se produit alors elle sera afficher dans les log
-    catch (error) {
+    } catch (error) {
       console.log(error);
     }
   };
 
+  const toggleCompleted = (index) => {
+    const updatedTaskList = [...myCase];
+    updatedTaskList[index].completed = !updatedTaskList[index].completed;
+    setMyCase(updatedTaskList);
+    saveTasks(updatedTaskList);
+  };
+
+  const removeTask = async (index) => {
+    const updatedTaskList = [...myCase];
+    updatedTaskList.splice(index, 1);
+    setMyCase(updatedTaskList);
+    await saveTasks(updatedTaskList);
+    await loadTasks()
+  };
+
   const saveTasks = async (tasks) => {
     try {
-      //Cette fonction utilise la méthode AsyncStorage.setItem pour enregistrer les tâches
-      await AsyncStorage.setItem('tasks', JSON.stringify(tasks));
-      //JSON.stringify(tasks) permet de passer les enregistremetn sous forme de chaine JSON
+      return await AsyncStorage.setItem('tasks', JSON.stringify(tasks));
     } catch (error) {
-      //Si une erreur se produit alors elle sera afficher dans les log
-
       console.log(error);
     }
   };
 
   const addTask = () => {
     if (task) {
-      const newTaskList = [...taskList, { text: task, completed: false }];
-      setTaskList(newTaskList);
+      const newTaskList = [...myCase, { text: task, completed: false }];
       setTask('');
       saveTasks(newTaskList);
+      setMyCase(newTaskList)
+      setOriginalTaskList(newTaskList)
     }
   };
 
-  const toggleCompleted = (index) => {
-    const updatedTaskList = [...taskList];
-    updatedTaskList[index].completed = !updatedTaskList[index].completed;
-    setTaskList(updatedTaskList);
-    saveTasks(updatedTaskList);
-  };
 
-  const removeTask = (index) => {
-    const updatedTaskList = [...taskList];
-    updatedTaskList.splice(index, 1);
-    setTaskList(updatedTaskList);
-    saveTasks(updatedTaskList);
-  };
 
   return (
-    <View style={styles.container}>
-      <TextInput
-        style={styles.input}
-        value={task}
-        onChangeText={setTask}
-        placeholder="Ajouter une tâche"
-      />
-      <TouchableOpacity style={styles.button} onPress={addTask}>
-        <Text style={styles.buttonText}>Ajouter</Text>
-      </TouchableOpacity>
-      {taskList.map((task, index) => (
-        <View style={styles.taskContainer} key={index}>
-          <TouchableOpacity onPress={() => toggleCompleted(index)}>
-            <Text style={[styles.taskText, task.completed && styles.completed]}>{task.text}</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => removeTask(index)}>
-            <Text style={styles.removeButton}>Supprimer</Text>
-          </TouchableOpacity>
-        </View>
-      ))}
-    </View>
+    <ScrollView contentContainerStyle={styles.container}>
+      <View >
+        <TextInput
+          style={styles.input}
+          value={task}
+          onChangeText={setTask}
+          placeholder="Ajouter une tâche"
+        />
+        <TouchableOpacity style={styles.button} onPress={addTask}>
+          <Text style={styles.buttonText}>Ajouter</Text>
+
+        </TouchableOpacity>
+        <SearchBar taskList={originalTaskList} onFilter={setMyCase} />
+        <TaskList taskList={myCase} styles={styles} onComplete={toggleCompleted} onRemove={removeTask} />
+
+      </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
+  removeButton: {
+
+
+  },
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#ffff',
     alignItems: 'center',
     justifyContent: 'flex-start',
     padding: 20,
@@ -99,13 +102,13 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
     marginBottom: 20,
-    width: '100%',
+
+    flexDirection: 'row'
   },
   button: {
     backgroundColor: '#007AFF',
     padding: 10,
     borderRadius: 5,
-    width: '100%',
     alignItems: 'center',
     marginBottom: 20,
   },
@@ -113,16 +116,41 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
   },
+
   taskContainer: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    backgroundColor: '#fff',
     marginBottom: 10,
+    borderRadius: 8,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+    elevation: 4,
   },
   taskText: {
     fontSize: 18,
-    marginRight: 10,
+    color: '#2c3e50',
+    flex: 1,
+    marginRight: 12,
+    textDecorationLine: 'none',
   },
   completed: {
     textDecorationLine: 'line-through',
+    color: '#7f8c8d',
   },
-})
+  removeButton: {
+    fontSize: 16,
+    color: '#e74c3c',
+    fontWeight: '600',
+    padding: 8,
+  },
+});
+

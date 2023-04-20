@@ -5,11 +5,14 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import MyTabs from './tabs/bottom';
 import Route from './route/route';
+import CaseContext from './context/CaseContext';
 
 
 function App() {
   return (
-    <Route/>
+    <CaseContext>
+      <Route />
+    </CaseContext>
   );
 }
 

@@ -1,9 +1,16 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import Home from '../View/Home';
-import Utilisation from '../View/Regle-d\'utilisation';
-import Profil from '../View/Profile';
-import WriteToFile from '../View/Profile';
+import Home from '../View/HomeScreen';
+import Utilisation from '../View/QRScreen';
+import Profil from '../View/CameraScreen';
+import WriteToFile from '../View/CameraScreen';
+import Camera from '../View/CameraScreen';
+import Camera1 from '../View/CameraScreen';
+import CameraScreen from '../View/CameraScreen';
+import CodeQR from '../View/QRScreen';
+import QRScreen from '../View/QRScreen';
+import ScanScreen from '../View/ScanScreen';
+import ProfilePage from '../View/ProfileScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -25,10 +32,10 @@ export default function MyTabs() {
           ),
         }}
       />
-      
+
       <Tab.Screen
         name="Profil"
-        component={WriteToFile}
+        component={ProfilePage}
         options={{
           tabBarLabel: 'Profil',
           tabBarIcon: ({ color, size }) => (
@@ -38,7 +45,7 @@ export default function MyTabs() {
       />
       <Tab.Screen
         name="À propos"
-        component={Utilisation}
+        component={QRScreen}
         options={{
           tabBarLabel: 'À propos',
           tabBarIcon: ({ color, size }) => (
@@ -46,6 +53,18 @@ export default function MyTabs() {
           ),
         }}
       />
+      <Tab.Screen
+        name="Scan"
+        component={ScanScreen}
+        options={{
+          tabBarLabel: 'Scan',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="data-matrix" color={color} size={size} />
+          ),
+        }}
+      />
+
+
     </Tab.Navigator>
   );
 }
