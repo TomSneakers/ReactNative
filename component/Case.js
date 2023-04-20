@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, ScrollView, StatusBar } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import SearchBar from './search';
 import TaskList from './taskList';
 import { Context } from '../context/CaseContext';
+import { shouldUseActivityState } from 'react-native-screens';
 
 export default function WriteToFile() {
   // get the context
@@ -65,22 +66,22 @@ export default function WriteToFile() {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <View >
+      <View>
         <TextInput
           style={styles.input}
           value={task}
           onChangeText={setTask}
-          placeholder="Ajouter une tâche"
+          placeholder="Ajouter un article à votre liste de course"
         />
         <TouchableOpacity style={styles.button} onPress={addTask}>
           <Text style={styles.buttonText}>Ajouter</Text>
-
         </TouchableOpacity>
+        <View style={{ borderBottomWidth: 2, borderBottomColor: 'black', marginBottom: 20 }} />
         <SearchBar taskList={originalTaskList} onFilter={setMyCase} />
         <TaskList taskList={myCase} styles={styles} onComplete={toggleCompleted} onRemove={removeTask} />
-
       </View>
     </ScrollView>
+
   );
 }
 
@@ -88,6 +89,10 @@ const styles = StyleSheet.create({
   removeButton: {
 
 
+  },
+  StatusBar: {
+    borderColor: 'black',
+    borderWidth: 5,
   },
   container: {
     flex: 1,

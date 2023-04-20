@@ -6,7 +6,7 @@ import CodeQR from '../component/CodeQr';
 export default function QRScreen({ finalList }) {
   return (
     <View style={styles.container}>
-      <CodeQR value={finalList} />
+      <CodeQR value={finalList}/>
     </View>
   );
 }

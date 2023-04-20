@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 import { useContext } from 'react';
 import { Context } from '../context/CaseContext';
@@ -12,8 +12,9 @@ export default function CodeQR() {
     return (
 
         <View style={styles.container}>
-            <QRCode value={data} />
-            <StatusBar />
+            <Text style={styles.text}> Partager votre liste de course</Text>
+            <QRCode value={data} size={300} />
+
         </View>
     );
 }
@@ -24,5 +25,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    text:{
+       marginBottom:10,
+        fontSize:50,
+        textAlign: 'center'
+       
     },
 });

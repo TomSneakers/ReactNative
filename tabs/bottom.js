@@ -1,13 +1,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Home from '../View/HomeScreen';
-import Utilisation from '../View/QRScreen';
-import Profil from '../View/CameraScreen';
-import WriteToFile from '../View/CameraScreen';
-import Camera from '../View/CameraScreen';
-import Camera1 from '../View/CameraScreen';
-import CameraScreen from '../View/CameraScreen';
-import CodeQR from '../View/QRScreen';
 import QRScreen from '../View/QRScreen';
 import ScanScreen from '../View/ScanScreen';
 import ProfilePage from '../View/ProfileScreen';
@@ -33,21 +26,12 @@ export default function MyTabs() {
         }}
       />
 
+      
       <Tab.Screen
-        name="Profil"
-        component={ProfilePage}
-        options={{
-          tabBarLabel: 'Profil',
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="account" color={color} size={size} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="À propos"
+        name="QR"
         component={QRScreen}
         options={{
-          tabBarLabel: 'À propos',
+          tabBarLabel: 'QR',
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="data-matrix" color={color} size={size} />
           ),
@@ -59,12 +43,21 @@ export default function MyTabs() {
         options={{
           tabBarLabel: 'Scan',
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="data-matrix" color={color} size={size} />
+            <MaterialCommunityIcons name="line-scan" color={color} size={size} />
           ),
         }}
       />
 
-
+<Tab.Screen
+        name="Profil"
+        component={ProfilePage}
+        options={{
+          tabBarLabel: 'Profil',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="account" color={color} size={size} />
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 }
