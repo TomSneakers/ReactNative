@@ -7,7 +7,8 @@ import { Context } from '../context/CaseContext';
 export default function CodeQR() {
     const { myCase, SetMyCase } = useContext(Context)
 
-    const data = JSON.stringify(myCase)
+    const data =  myCase.map(item => item.text).join('\n')
+
 
     return (
 

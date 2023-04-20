@@ -1,18 +1,32 @@
 import * as MailComposer from 'expo-mail-composer';
+import { Button } from 'react-native';
 import { useContext } from 'react';
 import { Context } from '../context/CaseContext';
 
+const SendEmailButton = () => {
+    const { myCase } = useContext(Context);
+    const recipient = 'example@mail.com';
 
+    const sendEmail = async () => {
+        try {
+            await MailComposer.composeAsync({
+                recipients: [recipient],
+                subject: 'Bonjour',
 
-const [myCase, setMyCase] = useContext(Context);
+                body: 'Liste des courses:\n\n' + myCase.map(item => item.text).join('\n')
 
-const SendEmail = () => {
-    const options = {
-        recipients: ['example@mail.com'],
-        subject: 'Liste de coursel',
-        body: JSON.stringify(myCase),
+            });
+        } catch (error) {
+            console.error('Impossible d\'envoyer l\'e-mail:', error);
+        }
     };
 
-    MailComposer.composeAsync(options);
+    return (
+        <Button
+            title="Envoyer ma liste de course par mail"
+            onPress={sendEmail}
+        />
+    );
 };
-export default SendEmail
+
+export default SendEmailButton;

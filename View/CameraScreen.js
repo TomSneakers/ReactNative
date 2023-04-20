@@ -126,7 +126,7 @@ export default function CameraScreen() {
               flex: 1,
               alignItems: "center",
               marginHorizontal: 50,
-              marginTop: 600
+              marginTop: 480,
 
             }}>
               {camera && <TouchableOpacity onPress={takePicture}>

@@ -3,10 +3,10 @@ import { StyleSheet, View } from 'react-native';
 import CodeQR from '../component/CodeQr';
 
 
-export default function QRScreen({ finalList }) {
+export default function QRScreen() {
   return (
     <View style={styles.container}>
-      <CodeQR value={finalList}/>
+      <CodeQR />
     </View>
   );
 }

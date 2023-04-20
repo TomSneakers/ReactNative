@@ -8,10 +8,10 @@ const Home = () => {
 
 
   return (
-    <View>
+    <>
       <Case />
       <SendEmail />
-    </View>
+      </>
   )
 
 }

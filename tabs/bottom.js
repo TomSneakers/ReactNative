@@ -4,6 +4,7 @@ import Home from '../View/HomeScreen';
 import QRScreen from '../View/QRScreen';
 import ScanScreen from '../View/ScanScreen';
 import ProfilePage from '../View/ProfileScreen';
+import ProfileScreen from '../View/ProfileScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -50,7 +51,7 @@ export default function MyTabs() {
 
 <Tab.Screen
         name="Profil"
-        component={ProfilePage}
+        component={ProfileScreen}
         options={{
           tabBarLabel: 'Profil',
           tabBarIcon: ({ color, size }) => (
