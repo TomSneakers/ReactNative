@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, TextInput, Button } from 'react-native';
+import { StyleSheet, View, Text, TextInput, Button, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 
@@ -54,7 +54,10 @@ export default function ProfilePage() {
                 value={bio}
                 onChangeText={setBio}
             />
-            <Button title="Sauvegarder" onPress={saveData} />
+            <TouchableOpacity onPress={saveData}>
+                <Text style={styles.title2}> Sauvegarder</Text>
+            </TouchableOpacity>
+          
         </View>
     );
 }
@@ -71,7 +74,13 @@ const styles = StyleSheet.create({
         fontSize: 28,
         fontWeight: 'bold',
         marginBottom: 20,
-        color: '#1E90FF',
+        color: '#00C4CC',
+    },
+    title2: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginBottom: 20,
+        color: '#00C4CC',
     },
     input: {
         borderWidth: 1,

@@ -10,7 +10,7 @@ const Tab = createBottomTabNavigator();
 
 export default function ProfileScreen() {
     return (
-        <Tab.Navigator>
+        <Tab.Navigator initialRouteName='home' screenOptions={{ headerShown: false }}>
             <Tab.Screen name="Page profil" component={ProfilePage} />
             <Tab.Screen
         name="Accueil"

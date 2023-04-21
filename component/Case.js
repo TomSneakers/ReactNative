@@ -7,16 +7,19 @@ import { Context } from '../context/CaseContext';
 import { shouldUseActivityState } from 'react-native-screens';
 
 export default function WriteToFile() {
-  // get the context
+  // Récupérer le contexte
   const { myCase, setMyCase } = useContext(Context);
 
+  // Définir les états pour la tâche et la liste de tâches originales
   const [task, setTask] = useState('');
   const [originalTaskList, setOriginalTaskList] = useState([]);
 
+  // Charger les tâches depuis le stockage asynchrone lors du montage du composant
   useEffect(() => {
     loadTasks();
   }, []);
 
+  // Fonction pour charger les tâches depuis le stockage asynchrone
   const loadTasks = async () => {
     try {
       const tasks = await AsyncStorage.getItem('tasks');
@@ -29,6 +32,7 @@ export default function WriteToFile() {
     }
   };
 
+  // Fonction pour inverser l'état d'achèvement d'une tâche
   const toggleCompleted = (index) => {
     const updatedTaskList = [...myCase];
     updatedTaskList[index].completed = !updatedTaskList[index].completed;
@@ -36,6 +40,7 @@ export default function WriteToFile() {
     saveTasks(updatedTaskList);
   };
 
+  // Fonction pour supprimer une tâche
   const removeTask = async (index) => {
     const updatedTaskList = [...myCase];
     updatedTaskList.splice(index, 1);
@@ -44,6 +49,7 @@ export default function WriteToFile() {
     await loadTasks()
   };
 
+  // Fonction pour enregistrer les tâches dans le stockage asynchrone
   const saveTasks = async (tasks) => {
     try {
       return await AsyncStorage.setItem('tasks', JSON.stringify(tasks));
@@ -52,6 +58,7 @@ export default function WriteToFile() {
     }
   };
 
+  // Fonction pour ajouter une nouvelle tâche à la liste
   const addTask = () => {
     if (task) {
       const newTaskList = [...myCase, { text: task, completed: false }];
@@ -61,8 +68,6 @@ export default function WriteToFile() {
       setOriginalTaskList(newTaskList)
     }
   };
-
-
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -81,7 +86,6 @@ export default function WriteToFile() {
         <TaskList taskList={myCase} styles={styles} onComplete={toggleCompleted} onRemove={removeTask} />
       </View>
     </ScrollView>
-
   );
 }
 
@@ -111,7 +115,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   button: {
-    backgroundColor: '#007AFF',
+    backgroundColor: '#00C4CC',
     padding: 10,
     borderRadius: 5,
     alignItems: 'center',

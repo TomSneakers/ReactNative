@@ -1,5 +1,5 @@
 import * as MailComposer from 'expo-mail-composer';
-import { Button } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { useContext } from 'react';
 import { Context } from '../context/CaseContext';
 
@@ -22,11 +22,31 @@ const SendEmailButton = () => {
     };
 
     return (
-        <Button
-            title="Envoyer ma liste de course par mail"
-            onPress={sendEmail}
-        />
+
+        <TouchableOpacity style={styles.button} onPress={sendEmail}>
+            <Text style={styles.buttonText}>Envoyer ma liste par mail</Text>
+        </TouchableOpacity>
+
+
+
     );
 };
+
+const styles = StyleSheet.create({
+    
+   
+    button: {
+      backgroundColor: '#00C4CC',
+      padding: 10,
+      borderRadius: 5,
+      alignItems: 'center',
+      marginBottom: 20,
+    },
+    buttonText: {
+      color: '#fff',
+      fontWeight: 'bold',
+    },
+})
+  
 
 export default SendEmailButton;

@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 import { useContext } from 'react';
 import { Context } from '../context/CaseContext';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 export default function CodeQR() {
     const { myCase, SetMyCase } = useContext(Context)
@@ -28,9 +29,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     text:{
-       marginBottom:10,
-        fontSize:50,
-        textAlign: 'center'
+       marginBottom:50,
+        fontSize:40,
+        textAlign: 'center',
+        color: '#00C4CC',
        
     },
 });
