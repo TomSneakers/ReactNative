@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, ScrollView, StatusBar } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import SearchBar from './search';
-import TaskList from './taskList';
+import SearchBar from './Search';
+import TaskList from './TaskList';
 import { Context } from '../context/CaseContext';
 import { shouldUseActivityState } from 'react-native-screens';
 
-export default function WriteToFile() {
+export default function ItemCourse() {
   // Récupérer le contexte
-  const { myCase, setMyCase } = useContext(Context);
+  const { myCase, setMyCase, scanned } = useContext(Context);
 
   // Définir les états pour la tâche et la liste de tâches originales
   const [task, setTask] = useState('');
@@ -18,6 +18,10 @@ export default function WriteToFile() {
   useEffect(() => {
     loadTasks();
   }, []);
+
+  useEffect(function () {
+    setOriginalTaskList(myCase)
+  }, [scanned])
 
   // Fonction pour charger les tâches depuis le stockage asynchrone
   const loadTasks = async () => {

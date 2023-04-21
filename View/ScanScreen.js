@@ -1,5 +1,5 @@
 import { View } from "react-native";
-import ScanQR from "../component/ScranQR";
+import ScanQR from "../component/ScanQR";
 
 export default function ScanScreen() {
     return (

@@ -6,10 +6,9 @@ import { Context } from '../context/CaseContext';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 export default function CodeQR() {
-    const { myCase, SetMyCase } = useContext(Context)
+    const { myCase } = useContext(Context)
 
-    const data =  myCase.map(item => item.text).join('\n')
-
+    const data = JSON.stringify(myCase);
 
     return (
 
@@ -28,11 +27,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    text:{
-       marginBottom:50,
-        fontSize:40,
+    text: {
+        marginBottom: 50,
+        fontSize: 40,
         textAlign: 'center',
         color: '#00C4CC',
-       
+
     },
 });

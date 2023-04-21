@@ -5,13 +5,13 @@ import { Context } from '../context/CaseContext';
 
 const SendEmailButton = () => {
     const { myCase } = useContext(Context);
-    const recipient = 'example@mail.com';
+    const recipient = 'mounir.bendahmane@ecole-isitech.fr';
 
     const sendEmail = async () => {
         try {
             await MailComposer.composeAsync({
                 recipients: [recipient],
-                subject: 'Bonjour',
+                subject: 'Liste de course',
 
                 body: 'Liste des courses:\n\n' + myCase.map(item => item.text).join('\n')
 
