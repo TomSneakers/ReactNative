@@ -42,3 +42,10 @@ Cette application à une interface très simple alors il n'y aura aucun soucis p
 
 Si un bug survient alors vous avez la possibiltés de recharger la page, allez dans votre terminale:
 Clqiuer sur "R"
+
+## Les technologies utilisées
+
+* Language: JavaScript
+* Back: NodeJs
+* FramWork: React-Native, Expo
+* Autre: Git
