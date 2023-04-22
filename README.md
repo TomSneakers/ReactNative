@@ -25,4 +25,8 @@ Elle dispo de plusieurs fonctionnalites comme:
 Pour l'installer il est très simple, il vous faut :
 
 - Un simulateur ios (donc l'installation de XCode est requise)
-- Puis allez dans votre terminale de commande la suivant
+- Puis allez dans votre terminale de commande la suivant:
+
+## npm  install
+
+
