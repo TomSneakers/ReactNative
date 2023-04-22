@@ -33,20 +33,20 @@ const SendEmailButton = () => {
 };
 
 const styles = StyleSheet.create({
-    
-   
+
+
     button: {
-      backgroundColor: '#00C4CC',
-      padding: 10,
-      borderRadius: 5,
-      alignItems: 'center',
-      marginBottom: 20,
+        backgroundColor: '#00C4CC',
+        padding: 10,
+        borderRadius: 5,
+        alignItems: 'center',
+        marginBottom: 20,
     },
     buttonText: {
-      color: '#fff',
-      fontWeight: 'bold',
+        color: '#fff',
+        fontWeight: 'bold',
     },
 })
-  
+
 
 export default SendEmailButton;

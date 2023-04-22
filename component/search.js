@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, TextInput, View } from 'react-native';
 
 export default function SearchBar(props) {
@@ -37,10 +37,10 @@ const style = StyleSheet.create({
         padding: 5,
         marginVertical: 10,
         width: '100%',
-      },
-      input: {
+    },
+    input: {
         flex: 1,
         paddingHorizontal: 10,
         fontSize: 16,
-      }
-    })
+    }
+})
