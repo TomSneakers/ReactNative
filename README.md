@@ -5,6 +5,8 @@
     Cette application permet à l'utilisateur de creer une liste de course
 
 **Quelles sont ses fonctionnalités ?**
+
+
 Elle dispo de plusieurs fonctionnalites comme:
 
 - Créer des articles à acheter (component/ItemCourse.js)
@@ -18,6 +20,8 @@ Elle dispo de plusieurs fonctionnalites comme:
 - Pouvoir prendre une photo directement prise avec l'application et l'envoyer via n'importe quelle plateforme installer sur votre mobile (View/CameraScreen.js)
 
 **Comment installer cette Application ?**
+
+
 Pour l'installer il est très simple, il vous faut :
 
 - Un simulateur ios (donc l'installation de XCode est requise)
