@@ -26,19 +26,18 @@ Pour l'installer il est très simple, il vous faut :
 - Puis allez dans votre terminale de commande la suivant:
   npm install
 
-__Comment lancé l'application__
+## Comment lancé l'application ?
 
 Il vous suffit d'entrer dans votre terminal, placer vous dans le dossier Liste_de_course:
-    cd Liste_de_course
+cd Liste_de_course
 Puis taper la commande suivante:
-    npm start
-    ou
-    npm run ios
+npm start
+ou
+npm run ios
 
-
-**Comment utiliser le projet ?**
+## Comment utiliser le projet ?
 
 Cette application à une interface très simple alors il n'y aura aucun soucis pour vous en servir, la barre de navigation du bas vous permet de vous dirigez vers les différents ecrans et ainsi à accéder au différentes fonctionnalités
 
 Si un bug survient alors vous avez la possibiltés de recharger la page, allez dans votre terminale:
-    Clqiuer sur "R"
+Clqiuer sur "R"
