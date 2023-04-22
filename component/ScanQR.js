@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Text, View, StyleSheet, Button, TouchableOpacity } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Context } from '../context/CaseContext';
@@ -28,9 +28,10 @@ export default function ScanQR() {
         await AsyncStorage.setItem('tasks', data)
         Alert.alert('LISTE AJOUTÉE', 'La liste de course à été ajouter dans accueil', [
             {
-              text: 'OK',
-              onPress: () => console.log('La liste de course a été ajoutée dans accueil'),}
-          ]);
+                text: 'OK',
+                onPress: () => console.log('La liste de course a été ajoutée dans accueil'),
+            }
+        ]);
     };
 
     if (hasPermission === null) {
@@ -52,7 +53,7 @@ export default function ScanQR() {
 
                     <Text style={styles.text}>La liste de course à été synchronisé</Text>
                     <TouchableOpacity style={styles.button} onPress={() => setScanned(false)}>
-                        <Text  style={styles.buttonText}>Scanner à nouveau</Text>
+                        <Text style={styles.buttonText}>Scanner à nouveau</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.button} onPress={async () => { navigation.navigate("Accueil") }}>
                         <Text style={styles.buttonText}>Afficher les données scannées</Text>
@@ -65,29 +66,29 @@ export default function ScanQR() {
 
 const styles = StyleSheet.create({
     container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     text: {
-    fontSize: 18,
-    marginBottom: 20,
-    textAlign: 'center',
-    fontWeight: 'bold',
-    color: '#FFFFFF'
+        fontSize: 18,
+        marginBottom: 20,
+        textAlign: 'center',
+        fontWeight: 'bold',
+        color: '#FFFFFF'
     },
     button: {
-    backgroundColor: '#00C4CC',
-    padding: 10,
-    borderRadius: 5,
-    marginBottom: 10,
+        backgroundColor: '#00C4CC',
+        padding: 10,
+        borderRadius: 5,
+        marginBottom: 10,
     },
     buttonText: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    textAlign: 'center'
+        color: '#FFFFFF',
+        fontSize: 16,
+        textAlign: 'center'
     },
     afterScan: {
         marginTop: 600,
     },
-    });
+});

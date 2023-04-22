@@ -1,5 +1,5 @@
 import { Camera, CameraType } from 'expo-camera';
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { SafeAreaView, ImageBackground, Text, TouchableOpacity, View } from 'react-native';
 import * as FileSystem from 'expo-file-system';
 import * as Sharing from 'expo-sharing';
@@ -88,20 +88,20 @@ export default function CameraScreen() {
         <View style={{
           flex: 1
         }}>
-          
+
           <ImageBackground source={{ uri: capturedImage.uri }} style={{
             flex: 1,
             padding: 16,
             alignItems: 'flex-end',
             justifyContent: 'space-between'
           }}>
-            
+
             <TouchableOpacity onPress={retakePicture}>
               <MaterialCommunityIcons name="close" color={"#fff"} size={48} style={{
                 opacity: 1
               }} />
             </TouchableOpacity>
-            
+
             <TouchableOpacity onPress={sharePicture}>
               <MaterialCommunityIcons name="send" color={"#fff"} size={48} style={{
                 opacity: 1
@@ -139,7 +139,7 @@ export default function CameraScreen() {
                 opacity: 0.7,
                 height: 20,
                 marginTop: 10,
-                
+
               }} />
             </View>
             <TouchableOpacity onress={changeFlashMode} onLongPress={toggleTorch}>

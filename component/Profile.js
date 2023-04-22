@@ -38,7 +38,7 @@ export default function ProfilePage() {
     };
 
     return (
-       
+
 
         <View style={styles.container}>
             <Text style={styles.title}>Mon profil</Text>
@@ -57,7 +57,7 @@ export default function ProfilePage() {
             <TouchableOpacity onPress={saveData}>
                 <Text style={styles.title2}> Sauvegarder</Text>
             </TouchableOpacity>
-          
+
         </View>
     );
 }

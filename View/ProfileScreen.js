@@ -1,18 +1,16 @@
-import { Button } from "react-native";
 import ProfilePage from "../component/Profile";
 import CameraScreen from "./CameraScreen";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Home from "./HomeScreen";
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Tab = createBottomTabNavigator();
 
 
 export default function ProfileScreen() {
-    return (
-        <Tab.Navigator initialRouteName='home' screenOptions={{ headerShown: false }}>
-            <Tab.Screen name="Page profil" component={ProfilePage} />
-            <Tab.Screen
+  return (
+    <Tab.Navigator initialRouteName='home' screenOptions={{ headerShown: false }}>
+      <Tab.Screen name="Page profil" component={ProfilePage} />
+      <Tab.Screen
         name="Accueil"
         component={CameraScreen}
         options={{
@@ -22,6 +20,6 @@ export default function ProfileScreen() {
           ),
         }}
       />
-        </Tab.Navigator>
-    );
+    </Tab.Navigator>
+  );
 }
