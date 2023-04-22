@@ -4,7 +4,7 @@
 
     Cette application permet à l'utilisateur de creer une liste de course
 
-**Quelles sont ses fonctionnalités ?**
+## Quelles sont ses fonctionnalités ?
 
 Elle dispo de plusieurs fonctionnalites comme:
 
@@ -18,22 +18,23 @@ Elle dispo de plusieurs fonctionnalites comme:
 - Pouvoir se creer un profile avec un pseudo et une bio (component/ProfilePage.js)
 - Pouvoir prendre une photo directement prise avec l'application et l'envoyer via n'importe quelle plateforme installer sur votre mobile (View/CameraScreen.js)
 
-**Comment installer cette Application ?**
+## les pré-requis pour installer l'application
 
 Pour l'installer il est très simple, il vous faut :
 
 - Un simulateur ios (donc l'installation de XCode est requise)
 - Puis allez dans votre terminale de commande la suivant:
-  npm install
+
+## Comment installer cette Application ?
+
+npm install
 
 ## Comment lancé l'application ?
 
-Il vous suffit d'entrer dans votre terminal, placer vous dans le dossier Liste_de_course:
-cd Liste_de_course
-Puis taper la commande suivante:
-npm start
-ou
-npm run ios
+    cd Liste_de_course
+    npm start
+    ou
+    npm run ios
 
 ## Comment utiliser le projet ?
 
