@@ -18,7 +18,7 @@ Elle dispo de plusieurs fonctionnalites comme:
 - Pouvoir se creer un profile avec un pseudo et une bio (component/ProfilePage.js)
 - Pouvoir prendre une photo directement prise avec l'application et l'envoyer via n'importe quelle plateforme installer sur votre mobile (View/CameraScreen.js)
 
-## les pré-requis pour installer l'application
+## Les pré-requis pour installer l'application
 
 Pour l'installer il est très simple, il vous faut :
 
@@ -45,7 +45,7 @@ Clqiuer sur "R"
 
 ## Les technologies utilisées
 
-* Language: JavaScript
-* Back: NodeJs
-* FramWork: React-Native, Expo
-* Autre: Git
+- Language: JavaScript
+- Back: NodeJs
+- FramWork: React-Native, Expo
+- Autre: Git

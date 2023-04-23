@@ -5,7 +5,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 const Tab = createBottomTabNavigator();
 
-
+//Screen pour le profil
 export default function ProfileScreen() {
   return (
     <Tab.Navigator initialRouteName='home' screenOptions={{ headerShown: false }}>

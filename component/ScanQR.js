@@ -6,14 +6,13 @@ import { Context } from '../context/CaseContext';
 import { useNavigation } from '@react-navigation/native';
 import { Alert } from 'react-native';
 
-
-
 export default function ScanQR() {
     const navigation = useNavigation();
     const [hasPermission, setHasPermission] = useState(null);
     const { myCase, setMyCase, scanned, setScanned } = useContext(Context);
 
     useEffect(() => {
+        // Demande l'autorisation d'accès à la caméra
         const getBarCodeScannerPermissions = async () => {
             const { status } = await BarCodeScanner.requestPermissionsAsync();
             setHasPermission(status === 'granted');
@@ -21,12 +20,13 @@ export default function ScanQR() {
         getBarCodeScannerPermissions();
     }, []);
 
+    // Gère le code scanné et stocke les données
     const handleBarCodeScanned = async ({ type, data }) => {
         const parsedData = JSON.parse(data);
         setScanned(true);
-        setMyCase(parsedData); // save scanned data
-        await AsyncStorage.setItem('tasks', data)
-        Alert.alert('LISTE AJOUTÉE', 'La liste de course à été ajouter dans accueil', [
+        setMyCase(parsedData); // sauvegarde les données scannées
+        await AsyncStorage.setItem('tasks', data);
+        Alert.alert('LISTE AJOUTÉE', 'La liste de course a été ajoutée dans accueil', [
             {
                 text: 'OK',
                 onPress: () => console.log('La liste de course a été ajoutée dans accueil'),
@@ -34,9 +34,11 @@ export default function ScanQR() {
         ]);
     };
 
+    // Affiche un message en attendant l'autorisation d'accès à la caméra
     if (hasPermission === null) {
         return <Text>Demande d'autorisation de la caméra</Text>;
     }
+    // Affiche un message si l'accès à la caméra est refusé
     if (hasPermission === false) {
         return <Text>Pas d'accès à la caméra</Text>;
     }
@@ -49,9 +51,7 @@ export default function ScanQR() {
             />
             {scanned && (
                 <View style={styles.afterScan}>
-
-
-                    <Text style={styles.text}>La liste de course à été synchronisé</Text>
+                    <Text style={styles.text}>La liste de course a été synchronisée</Text>
                     <TouchableOpacity style={styles.button} onPress={() => setScanned(false)}>
                         <Text style={styles.buttonText}>Scanner à nouveau</Text>
                     </TouchableOpacity>
@@ -64,6 +64,7 @@ export default function ScanQR() {
     );
 }
 
+// Styles pour les éléments de l'interface
 const styles = StyleSheet.create({
     container: {
         flex: 1,

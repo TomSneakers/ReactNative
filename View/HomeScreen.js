@@ -3,7 +3,7 @@ import SendEmail from '../component/Mail';
 
 const Home = () => {
 
-
+//Screen principal
   return (
     <>
       <Case />
